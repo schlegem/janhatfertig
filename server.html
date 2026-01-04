@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Jans Renten-Countdown</title>
+    <style>
+        body { background-color: black; color: white; display: flex; justify-content: center; align-items: center; height: 100vh; font-family: sans-serif; text-align: center; margin: 0; }
+        #countdown { font-size: 3rem; font-weight: bold; }
+        .label { font-size: 1rem; text-transform: uppercase; display: block; }
+    </style>
+</head>
+<body>
+
+    <div>
+        <h1>Jan geht in Rente in...</h1>
+        <div id="countdown">Lädt...</div>
+    </div>
+
+    <script>
+        const targetDate = new Date("September 30, 2026 15:00:00").getTime();
+
+        const timer = setInterval(function() {
+            const now = new Date().getTime();
+            const distance = targetDate - now;
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById("countdown").innerHTML = 
+                days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+
+            if (distance < 0) {
+                clearInterval(timer);
+                document.getElementById("countdown").innerHTML = "FREIHEIT!";
+            }
+        }, 1000);
+    </script>
+</body>
+</html>
